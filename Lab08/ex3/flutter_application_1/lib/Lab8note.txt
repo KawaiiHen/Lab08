@@ -1,0 +1,35 @@
+  var notes = [
+    {
+      'title': 'Việt Nam khởi đầu tốt nhất lịch sử dự U20 châu Á',
+      'content':
+          'Lần đầu trong lịch sử 64 năm của giải U20 châu Á, Việt Nam thắng cả hai trận đầu tiên, trước Australia và Qatar.'
+    },
+    {
+      'title': 'Truyền thông Indonesia khen U20 Việt Nam phi thường',
+      'content':
+          'Nhiều báo, đài Indonesia ngạc nhiên khi Việt Nam toàn thắng hai trận đầu ở bảng đấu khó tại vòng chung kết U20 châu Á 2023'
+    },
+    {
+      'title':
+          'Nguyễn Thanh Nhàn tỏa sáng, dẫn dắt U20 Việt Nam đến chiến thắng',
+      'content':
+          'Tiền đạo Nguyễn Thanh Nhàn đang là cái tên nổi bật nhất trong đội hình U20 Việt Nam. Với khả năng ghi bàn ấn tượng và lối chơi thông minh, Thanh Nhàn đã đóng góp rất lớn vào thành công của đội nhà. Cú đúp vào lưới U20 Australia đã khẳng định tài năng của cầu thủ trẻ này.'
+    },
+    {
+      'title':
+          'Tinh thần đồng đội tuyệt vời giúp U20 Việt Nam vượt qua mọi thử thách',
+      'content':
+          'Một trong những yếu tố quan trọng giúp U20 Việt Nam đạt được thành công là tinh thần đồng đội cao. Các cầu thủ luôn sát cánh bên nhau, hỗ trợ lẫn nhau trong mọi tình huống. Điều này đã tạo nên một tập thể đoàn kết, vững mạnh và khó bị đánh bại.'
+    },
+    {
+      'title': 'U20 Việt Nam tạo nên lịch sử mới tại U20 châu Á',
+      'content':
+          'Thành tích của U20 Việt Nam tại giải đấu năm nay là một cột mốc quan trọng trong lịch sử bóng đá trẻ Việt Nam. So với các kỳ U20 châu Á trước, U20 Việt Nam đã có sự tiến bộ vượt bậc về cả chuyên môn và tinh thần. Đây là một tín hiệu rất đáng mừng cho bóng đá nước nhà.'
+    },
+    {
+      'title':
+          'U20 Việt Nam: Hứa hẹn một tương lai tươi sáng cho bóng đá Việt Nam',
+      'content':
+          'Với những gì đã thể hiện, U20 Việt Nam đã chứng minh rằng bóng đá Việt Nam đang sở hữu một lứa cầu thủ tài năng. Thành công của U20 Việt Nam sẽ là động lực lớn để các cầu thủ trẻ khác cố gắng hơn nữa, hướng tới mục tiêu chinh phục những đỉnh cao mới.'
+    },
+  ];
