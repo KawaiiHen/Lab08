@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unused_import
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,7 +5,7 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(primarySwatch: Colors.deepPurple),
-    home: UserPreferencesScreen(),
+    home: const UserPreferencesScreen(),
   ));
 }
 
@@ -19,6 +17,7 @@ class UserPreferencesScreen extends StatefulWidget {
 }
 
 class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
+  late SharedPreferences _pref;
   String _language = 'English';
   String _colorTheme = 'Light';
   bool _notification = false;
@@ -35,29 +34,33 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
   @override
   void initState() {
     super.initState();
+    _initializePreferences();
+  }
+
+  // Initialize SharedPreferences and load saved preferences
+  Future<void> _initializePreferences() async {
+    _pref = await SharedPreferences.getInstance();
     _loadPreferences();
   }
 
   // Load saved preferences
   Future<void> _loadPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      _language = prefs.getString('language') ?? 'English';
-      _colorTheme = prefs.getString('colorTheme') ?? 'Light';
-      _notification = prefs.getBool('notification') ?? false;
-      _displayName = prefs.getString('displayName') ?? 'User';
-      _selectedVideoQuality = prefs.getString('videoQuality') ??
+      _language = _pref.getString('language') ?? 'English';
+      _colorTheme = _pref.getString('colorTheme') ?? 'Light';
+      _notification = _pref.getBool('notification') ?? false;
+      _displayName = _pref.getString('displayName') ?? 'User';
+      _selectedVideoQuality = _pref.getString('videoQuality') ??
           '720p HD at 30 fps'; // Load video quality
     });
   }
 
   // Save data whenever a setting is changed
   Future<void> _savePreference(String key, dynamic value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     if (value is String) {
-      await prefs.setString(key, value);
+      await _pref.setString(key, value);
     } else if (value is bool) {
-      await prefs.setBool(key, value);
+      await _pref.setBool(key, value);
     }
   }
 
@@ -89,7 +92,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-              title: Text('Change Display Name'),
+              title: const Text('Change Display Name'),
               content: TextFormField(
                 controller: nameController,
               ),
@@ -98,7 +101,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text('Close'),
+                  child: const Text('Close'),
                 ),
                 TextButton(
                   onPressed: () {
@@ -108,7 +111,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                     });
                     Navigator.pop(context);
                   },
-                  child: Text('Save'),
+                  child: const Text('Save'),
                 )
               ],
             ));
@@ -118,7 +121,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
     showModalBottomSheet(
         context: context,
         builder: (ctx) => ListView.separated(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               itemCount: videoQualities.length,
               itemBuilder: (ctx, index) {
                 return ListTile(
@@ -133,7 +136,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                   },
                 );
               },
-              separatorBuilder: (ctx, index) => Divider(),
+              separatorBuilder: (ctx, index) => const Divider(),
             ));
   }
 
@@ -142,13 +145,13 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.purple, // Set background color to purple
-        title: Text(
+        title: const Text(
           'User Preferences',
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white), // Make title bold
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -164,7 +167,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                   hintText: _displayName, // Show current display name
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Language',
                 style: Theme.of(context).textTheme.bodySmall,
@@ -180,7 +183,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Color Theme',
                 style: Theme.of(context).textTheme.bodySmall,
@@ -196,7 +199,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Notification',
                 style: Theme.of(context).textTheme.bodySmall,
@@ -205,9 +208,9 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                 contentPadding: EdgeInsets.zero,
                 value: _notification,
                 onChanged: _onNotificationChanged,
-                title: Text('Banners, Sounds, Badges'),
+                title: const Text('Banners, Sounds, Badges'),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Text(
                 'Record Video',
                 style: Theme.of(context).textTheme.bodySmall,
@@ -216,7 +219,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                 onTap: _videoRecodingbottomSheet,
                 readOnly: true,
                 decoration: InputDecoration(
-                  suffixIcon: Icon(Icons.arrow_drop_down),
+                  suffixIcon: const Icon(Icons.arrow_drop_down),
                   hintText:
                       _selectedVideoQuality, // Show current selected video quality
                 ),

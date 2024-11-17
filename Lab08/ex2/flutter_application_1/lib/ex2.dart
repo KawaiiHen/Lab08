@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unused_import
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -8,7 +6,7 @@ void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(primarySwatch: Colors.deepPurple),
-    home: FileManagerApp(),
+    home: const FileManagerApp(),
   ));
 }
 
@@ -44,7 +42,7 @@ class _FileManagerAppState extends State<FileManagerApp> {
   void _listFiles() {
     if (_directory != null) {
       setState(() {
-        _files = _directory!.listSync();
+        _files = _directory!.listSync().where((entity) => entity is File && !entity.path.endsWith('.DS_Store')).toList();
       });
     }
   }
@@ -123,50 +121,50 @@ class _FileManagerAppState extends State<FileManagerApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('File Manager'),
+        title: const Text('File Manager'),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             TextFormField(
               controller: _fileNameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'File Name',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             TextFormField(
               controller: _fileContentController,
               maxLines: 5,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Content',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _saveFile,
-                    style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50)),
-                    child: Text('Save or Update'),
+                    style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
+                    child: const Text('Save or Update'),
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _readFile,
-                    style: ElevatedButton.styleFrom(minimumSize: Size.fromHeight(50)),
-                    child: Text('Read file'),
+                    style: ElevatedButton.styleFrom(minimumSize: const Size.fromHeight(50)),
+                    child: const Text('Read file'),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Expanded(
               child: ListView.builder(
                 itemCount: _files.length,
@@ -178,11 +176,11 @@ class _FileManagerAppState extends State<FileManagerApp> {
                         onTap: () => _viewFileContent(file.path),
                         title: Text(file.uri.pathSegments.last),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () => _deleteFile(file.path),
                         ),
                       ),
-                      Divider(height: 1),
+                      const Divider(height: 1),
                     ],
                   );
                 },
