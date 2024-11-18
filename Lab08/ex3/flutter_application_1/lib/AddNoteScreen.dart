@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AddNoteScreen extends StatefulWidget {
-  final Map<String, String?>? note;
+  final Map<String, dynamic>? note;
 
   const AddNoteScreen({super.key, this.note});
 
@@ -61,14 +61,6 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     return true; // Allow exit if not edited
   }
 
-  // void _saveNote() {
-  //   if (_isEdited) {
-  //     Navigator.pop(context, {
-  //       'title': _titleController.text,
-  //       'content': _contentController.text,
-  //     });
-  //   }
-  // }
   void _saveNote() {
     if (_isEdited) {
       Navigator.pop(context, {
@@ -81,7 +73,6 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
     return WillPopScope(
       onWillPop: _onWillPop, // Intercepts the back button press
       child: Scaffold(
